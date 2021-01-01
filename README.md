@@ -10,25 +10,28 @@ with
 rvcd project
 ```
 
-## Usage
-
+## Setup
 1. Clone thie repo.
-2. open directoy in terminal
-3. make rvcd file executable by running 
+2. Edit line 5 in rvcd file, change [your projects directory]
+3. Open repo directoy in terminal
+4. Make rvcd file executable by running 
     ```
     chmod u+x rvcd
     ``` 
     or open properties of rvcd file and make executable(under Permissions).
     
-4. move file to usr/bin by running 
+5. Move file to usr/bin by running 
     ```
     sudo mv rvcd /usr/bin
     ```
-4. Assuming you have a Gemfile and your gemset is named after your project, just type:
-    ```
-    rvcd [project name]
-    ```
-    If yor gemset is names otherwise:
-    ```
-    rvcd [project_name] [gemset_name]
-    ```
+
+## Usage
+Assuming you have a Gemfile and your gemset is named after your project, just type:
+```
+rvcd [project name]
+```
+If yor gemset is named otherwise:
+```
+rvcd [project_name] [gemset_name]
+```
+

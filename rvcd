@@ -1,7 +1,8 @@
 #!/bin/bash
- set -e
+
+############# EDIT HERE #############
 # Directory of projects
-projects_dir=dev
+projects_dir=[your projects directory]
 
 # Get project name from first argumnt
 project=$1

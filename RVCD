@@ -1,0 +1,65 @@
+#!/bin/bash
+ set -e
+# Directory of projects
+projects_dir=dev
+
+# Get project name from first argumnt
+project=$1
+
+gemset=$2
+
+# Store currnt location for eroor condition
+current_dir=$PWD
+trap 'catch $? $LINENO' ERR
+
+catch() {
+  echo "Error $1 occurred on $2"
+  if [ $1 -eq 2 ] ; then
+    echo "No gemset found..."
+    read -p "Create gemset $gemset on ruby-${ruby[1]//\'}?(yn)" yn
+    case $yn in
+        [Yy]* ) echo yes; cd; cd $projects_dir/$project ; rvm use ${ruby[1]//\'}@$gemset --create ; exec bash;;
+        [Nn]* ) echo no; cd; cd $projects_dir/$project ; exec bash ; exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+  fi
+}
+
+
+# cd to home
+cd 
+
+# if the directory exist cd to it
+if cd $projects_dir/$project ; then
+  echo "Going to $projects_dir/$project"
+  # Read the Gemfile and store the ruby version
+  while IFS= read -r line
+  do
+    if [[ "$line" == ruby* ]] ; then
+      ruby=($line)
+      break
+    fi
+  done < Gemfile
+  
+  # Make sure RVM can run 'use' function
+  source ~/.rvm/scripts/rvm
+  # If no second argument rvm uses the roject name as gemset
+  if [ -z "$gemset" ] ; then
+    rvm use ${ruby[1]//\'}@$project
+  else
+    # If second argument is provided, rvm uses it as gemset
+    
+    rvm use ${ruby[1]//\'}@$gemset
+    
+
+  fi
+else
+  # if direcotry does not exist go back to last location
+  cd $current_dir
+fi
+
+exec bash
+
+
+
+

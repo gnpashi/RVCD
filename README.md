@@ -30,7 +30,7 @@ Assuming you have a Gemfile and your gemset is named after your project, just ty
 ```
 rvcd [project name]
 ```
-If yor gemset is named otherwise:
+If your gemset is named otherwise:
 ```
 rvcd [project_name] [gemset_name]
 ```
